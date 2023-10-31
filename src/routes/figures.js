@@ -9,7 +9,7 @@ const {
 } = require("../services/firestore/figures");
 
 /**
- * @api {get} /figure/ Get All
+ * @api {get} /figures/ Get All
  * @apiName GetFigures
  * @apiGroup Figure
  *
@@ -24,7 +24,7 @@ const {
 router.get("/", getDocs);
 
 /**
- * @api {get} /figure/:id Get
+ * @api {get} /figures/:id Get
  * @apiName GetFigure
  * @apiGroup Figure
  *
@@ -41,7 +41,7 @@ router.get("/", getDocs);
 router.get("/:id", getDoc);
 
 /**
- * @api {post} /figure/ Create
+ * @api {post} /figures/ Create
  * @apiName CreateFigure
  * @apiGroup Figure
  *
@@ -63,7 +63,7 @@ router.get("/:id", getDoc);
 router.post("/", createDoc);
 
 /**
- * @api {post} /figure/:id Update
+ * @api {post} /figures/:id Update
  * @apiName UpdateFigure
  * @apiGroup Figure
  *
@@ -87,7 +87,7 @@ router.post("/", createDoc);
 router.post("/:id", updateDoc);
 
 /**
- * @api {delete} /figure/:id Delete
+ * @api {delete} /figures/:id Delete
  * @apiName DeleteFigure
  * @apiGroup Figure
  *
