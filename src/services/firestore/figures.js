@@ -1,5 +1,6 @@
 const figureSchema = require("../../models/figure");
 const { db } = require("./firebase");
+require("dotenv").config();
 
 const collection = "figures";
 
@@ -48,6 +49,9 @@ const createDoc = async (req, res) => {
   if (!doc) {
     return res.status(400).json({ error: "Doc required" });
   }
+  if (!doc.apiToken || doc.apiToken !== process.env.API_TOKEN) {
+    return res.status(400).json({ error: "Invalid API Token" });
+  }
 
   const figure = figureSchema.parse({
     name: doc.name || "",
@@ -81,6 +85,9 @@ const updateDoc = async (req, res) => {
   if (!doc) {
     return res.status(400).json({ error: "Doc required" });
   }
+  if (!doc.apiToken || doc.apiToken !== process.env.API_TOKEN) {
+    return res.status(400).json({ error: "Invalid API Token" });
+  }
 
   const figure = figureSchema.parse({
     name: doc.name || "",
@@ -92,7 +99,7 @@ const updateDoc = async (req, res) => {
   });
 
   try {
-    await db.collection(collection).doc(docId).update(doc);
+    await db.collection(collection).doc(docId).update(figure);
     const docData = await db.collection(collection).doc(docId).get();
     res.send({
       id: docData.id,
@@ -107,8 +114,12 @@ const updateDoc = async (req, res) => {
 
 const deleteDoc = async (req, res) => {
   const docId = req.params.id;
+  const apiToken = req.body.apiToken;
   if (!docId) {
     return res.status(400).json({ error: "ID required" });
+  }
+  if (!apiToken || apiToken !== process.env.API_TOKEN) {
+    return res.status(400).json({ error: "Invalid API Token" });
   }
   try {
     await db.collection(collection).doc(docId).delete();
