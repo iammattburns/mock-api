@@ -10,7 +10,7 @@
     "build-docs": "apidoc -i src -o src/docs && apidoc-markdown -i src -o readme.md"
   },
   "keywords": [],
-  "author": "",
+  "author": "Matt Burns",
   "license": "ISC",
   "apidoc": {
     "name": "Mock API Documentation",
