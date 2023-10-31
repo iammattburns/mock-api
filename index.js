@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 const figuresRouter = require("./src/routes/figures");
 
 const app = express();
@@ -19,9 +20,7 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
-  res.json({ message: "ok" });
-});
+app.use("/", express.static(path.join(__dirname, "/src/docs")));
 
 app.use("/figures", figuresRouter);
 
